@@ -1,4 +1,4 @@
-// Hangman game made
+// Hangman game
 
 var Hangman = {
 
@@ -11,6 +11,7 @@ var Hangman = {
     displayArray: [],
     wrongGuesses: [],
     prepWord: function (word) {
+
         for (var i = 0; i < word.length; i++) {
             if(/^[a-zA-Z\s]*$/.test(word.charAt(i))) {
                 if (word.charAt(i) == ' ') {
@@ -23,6 +24,11 @@ var Hangman = {
             }
         }
     },
+    /*reset: function () {
+        this.wordChoice();
+        this.displayArray = [];
+        this.wrongGuesses = [];
+    },*/
     printArray: function (targetTag, array) {
         $(targetTag).html(array.join(" "));
     }
@@ -43,6 +49,7 @@ $(document).ready(function(){
         Hangman.wrongGuesses = [];
 
         Hangman.prepWord(chosenWord);
+        Hangman.printArray("#tried-array", Hangman.wrongGuesses);
         Hangman.printArray("#word-array", Hangman.displayArray);
     });
 
@@ -60,7 +67,7 @@ $(document).ready(function(){
             if(Hangman.wrongGuesses.length > 5){
 
                 // Ends condition code goes here
-
+                //Hangman.reset();
             }
 
 
@@ -75,7 +82,7 @@ $(document).ready(function(){
             if(correctGuesses == chosenWord.length){
 
                 // Win Condition Code goes here.
-
+                //Hangman.reset();
             }
 
         }
