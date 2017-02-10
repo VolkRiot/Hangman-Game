@@ -33,10 +33,12 @@ var Hangman = {
 $(document).ready(function(){
 
     var chosenWord;
+    var correctGuesses = 0;
 
     $("#play").on('click', function(){
 
         chosenWord = Hangman.wordChoice();
+        correctGuesses = 0;
         Hangman.displayArray = [];
         Hangman.wrongGuesses = [];
 
@@ -50,13 +52,14 @@ $(document).ready(function(){
         var letterIndex = chosenWord.toLowerCase().indexOf(userInput);
         var updated = false;
 
-        if ((letterIndex < 0) && (Hangman.wrongGuesses.indexOf(userInput) == -1)) {
+
+        if ((letterIndex < 0) && (Hangman.wrongGuesses.indexOf(userInput.toUpperCase()) == -1)) {
             Hangman.wrongGuesses.push(userInput.toUpperCase());
             Hangman.printArray("#tried-array", Hangman.wrongGuesses);
 
             if(Hangman.wrongGuesses.length > 5){
 
-                // Ends the game
+                // Ends condition code goes here
 
             }
 
@@ -65,9 +68,16 @@ $(document).ready(function(){
             for(var i = 0; i < chosenWord.length; i++){
                 if(chosenWord[i].toLowerCase() == userInput.toLowerCase()){
                     Hangman.displayArray[i] = chosenWord[i];
+                    correctGuesses++;
                     updated = true;
                 }
             }
+            if(correctGuesses == chosenWord.length){
+
+                // Win Condition Code goes here.
+
+            }
+
         }
         if(updated === true){
             Hangman.printArray("#word-array", Hangman.displayArray);
