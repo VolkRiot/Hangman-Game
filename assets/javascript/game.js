@@ -23,8 +23,8 @@ var Hangman = {
             }
         }
     },
-    printArray: function (targetTag) {
-        $(targetTag).html(this.displayArray.join(" "));
+    printArray: function (targetTag, array) {
+        $(targetTag).html(array.join(" "));
     }
 };
 
@@ -41,7 +41,7 @@ $(document).ready(function(){
         Hangman.wrongGuesses = [];
 
         Hangman.prepWord(chosenWord);
-        Hangman.printArray("#wordArray");
+        Hangman.printArray("#word-array", Hangman.displayArray);
     });
 
     $(document).on('keyup', function (){
@@ -50,11 +50,15 @@ $(document).ready(function(){
         var letterIndex = chosenWord.toLowerCase().indexOf(userInput);
         var updated = false;
 
-        if (letterIndex < 0){
+        if ((letterIndex < 0) && (Hangman.wrongGuesses.indexOf(userInput) == -1)) {
             Hangman.wrongGuesses.push(userInput.toUpperCase());
+            Hangman.printArray("#tried-array", Hangman.wrongGuesses);
 
-            //Game loss logic
-            
+            if(Hangman.wrongGuesses.length > 5){
+
+                // Ends the game
+
+            }
 
 
         }else{
@@ -66,7 +70,7 @@ $(document).ready(function(){
             }
         }
         if(updated === true){
-            Hangman.printArray("#wordArray");
+            Hangman.printArray("#word-array", Hangman.displayArray);
         }
     });
 });
