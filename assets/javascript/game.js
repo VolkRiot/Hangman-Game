@@ -47,14 +47,16 @@ $(document).ready(function(){
     $(document).on('keyup', function (){
 
         var userInput = String.fromCharCode(event.keyCode).toLowerCase();
-
-        console.log("User Input Registers as " + userInput);
-
         var letterIndex = chosenWord.toLowerCase().indexOf(userInput);
         var updated = false;
 
         if (letterIndex < 0){
             Hangman.wrongGuesses.push(userInput.toUpperCase());
+
+            //Game loss logic
+            
+
+
         }else{
             for(var i = 0; i < chosenWord.length; i++){
                 if(chosenWord[i].toLowerCase() == userInput.toLowerCase()){
