@@ -10,7 +10,7 @@ var Hangman = {
   films: ["It's a Wonderful Life", "Raider's of the Lost Arc", "Star Wars", "Citizen Kane",
     "Full Metal Jacket", "Clockwork Orange", "Titanic", "The Godfather", "Forrest Gump",
     "Taxi Driver", "Avatar", "2001: A Space Odyssey", "The Lion King", "Back to the Future",
-    "Rocky", "Pulp Fiction", "The Matrix", "Jaws", "Jurassic Park", "Airplane!", "Braveheart"],
+    "Rocky", "Pulp Fiction", "The Matrix", "Jaws", "Jurassic Park", "Airplane!", "Braveheart", "Kill Bill"],
   stickFig:["assets/images/hangman-imgs/Hangman-0.png", "assets/images/hangman-imgs/Hangman-1.png", "assets/images/hangman-imgs/Hangman-2.png", "assets/images/hangman-imgs/Hangman-3.png", "assets/images/hangman-imgs/Hangman-4.png", "assets/images/hangman-imgs/Hangman-5.png", "assets/images/hangman-imgs/Hangman-6.png"],
   wordChoice: function () {
     return this.films[Math.floor(Math.random() * this.films.length)]
@@ -28,7 +28,7 @@ var Hangman = {
           this.displayArray.push('_');
           this.totalLetters++;
         }
-      } else {
+      }else {
         this.displayArray.push(word.charAt(i));
       }
     }
@@ -107,6 +107,9 @@ $(document).ready(function () {
         wins++;
         $("#win-counter").html(wins);
         correctGuesses = 0;
+
+        // Remove winning word from the array to avoid repetition
+        Hangman.films.splice(Hangman.films.indexOf(chosenWord), 1);
 
         //Add code here to reward the player i.e. show graphic etc
 
