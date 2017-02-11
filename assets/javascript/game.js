@@ -58,12 +58,9 @@ function newWord() {
 
 $(document).ready(function () {
 
-  $("#play").on('click', function () {
-
     // Reset whole game
     resetAll();
     newWord();
-  });
 
   $(document).on('keyup', function () {
 
