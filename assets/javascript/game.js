@@ -31,9 +31,10 @@ var Hangman = {
   printArray: function (targetTag, array) {
     $(targetTag).html(array.join(" "));
   },
-  resetArrays: function () {
+  resetGame: function () {
     this.wrongGuesses = [];
     this.displayArray = [];
+    $("#hangman-image").attr("src", Hangman.stickFig[0]);
   }
 };
 
@@ -58,6 +59,7 @@ $(document).ready(function () {
     Hangman.prepWord(chosenWord);
     Hangman.printArray("#tried-array", Hangman.wrongGuesses);
     Hangman.printArray("#word-array", Hangman.displayArray);
+    $("#hangman-image").attr("src", Hangman.stickFig[0]);
   });
 
   $(document).on('keyup', function () {
@@ -79,7 +81,7 @@ $(document).ready(function () {
         losses++;
         $("#loss-counter").html(losses);
         losses = 0;
-        Hangman.resetArrays();
+        Hangman.resetGame();
 
         // Needs to stop game show or loss artifact
 
@@ -103,7 +105,7 @@ $(document).ready(function () {
         wins++;
         $("#win-counter").html(wins);
         correctGuesses = 0;
-        Hangman.resetArrays();
+        Hangman.resetGame();
 
         //Needs to display win and restart game.
 
