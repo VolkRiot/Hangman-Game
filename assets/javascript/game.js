@@ -28,15 +28,12 @@ var Hangman = {
       }
     }
   },
-  /*reset: function () {
-   this.displayArray = [];
-   this.wrongGuesses = [];
-   this.totalLetter = 0;
-   },*/
   printArray: function (targetTag, array) {
     $(targetTag).html(array.join(" "));
   }
 };
+
+
 
 // Begins actual document run
 
