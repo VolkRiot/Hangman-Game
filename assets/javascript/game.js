@@ -6,7 +6,6 @@ var wins = 0;
 var losses = 0;
 
 var Hangman = {
-
   films: [{
     "title": "It's a Wonderful Life",
     "imgPath": "assets/images/moviePosters/itsawonderfullife.jpeg"
