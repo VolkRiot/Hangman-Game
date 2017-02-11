@@ -1,4 +1,9 @@
 // Hangman game
+// Globals
+var chosenWord;
+var correctGuesses = 0;
+var wins = 0;
+var losses = 0;
 
 var Hangman = {
 
@@ -38,28 +43,26 @@ var Hangman = {
   }
 };
 
+function resetAll() {
+  Hangman.resetGame();
+  correctGuesses = 0;
+}
 
-
-// Begins actual document run
+function newWord() {
+  chosenWord = Hangman.wordChoice();
+  Hangman.prepWord(chosenWord);
+  Hangman.printArray("#tried-array", Hangman.wrongGuesses);
+  Hangman.printArray("#word-array", Hangman.displayArray);
+  $("#hangman-image").attr("src", Hangman.stickFig[0]);
+}
 
 $(document).ready(function () {
 
-  var chosenWord;
-  var correctGuesses = 0;
-  var wins = 0;
-  var losses = 0;
-
   $("#play").on('click', function () {
 
-    chosenWord = Hangman.wordChoice();
-    correctGuesses = 0;
-    Hangman.displayArray = [];
-    Hangman.wrongGuesses = [];
-
-    Hangman.prepWord(chosenWord);
-    Hangman.printArray("#tried-array", Hangman.wrongGuesses);
-    Hangman.printArray("#word-array", Hangman.displayArray);
-    $("#hangman-image").attr("src", Hangman.stickFig[0]);
+    // Reset whole game
+    resetAll();
+    newWord();
   });
 
   $(document).on('keyup', function () {
@@ -76,12 +79,13 @@ $(document).ready(function () {
 
       if (Hangman.wrongGuesses.length > 5) {
 
-        // Ends condition code goes here
+        // Game over condition code goes here
 
         losses++;
         $("#loss-counter").html(losses);
         losses = 0;
-        Hangman.resetGame();
+        resetAll();
+        newWord();
 
         // Needs to stop game show or loss artifact
 
@@ -93,7 +97,6 @@ $(document).ready(function () {
         if ((chosenWord[i].toLowerCase() == userInput.toLowerCase()) && (Hangman.displayArray[i] != chosenWord[i])) {
           Hangman.displayArray[i] = chosenWord[i];
           correctGuesses++;
-          console.log("Correct Guesses " + correctGuesses);
           updated = true;
         }
       }
@@ -101,11 +104,14 @@ $(document).ready(function () {
 
         // Win Condition Code goes here.
 
-        console.log("Total Letters is " + Hangman.totalLetters);
         wins++;
         $("#win-counter").html(wins);
         correctGuesses = 0;
-        Hangman.resetGame();
+
+        //Add code here to reward the player i.e. show graphic etc
+
+        resetAll();
+        newWord();
 
         //Needs to display win and restart game.
 
