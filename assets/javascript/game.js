@@ -6,7 +6,7 @@ var Hangman = {
     "Full Metal Jacket", "Clockwork Orange", "Titanic", "The Godfather", "Forrest Gump",
     "Taxi Driver", "Avatar", "2001: A Space Odyssey", "The Lion King", "Back to the Future",
     "Rocky", "Pulp Fiction", "The Matrix", "Jaws", "Jurassic Park", "Airplane!", "Braveheart"],
-
+  stickFig:["assets/images/hangman-imgs/Hangman-0.png", "assets/images/hangman-imgs/Hangman-1.png", "assets/images/hangman-imgs/Hangman-2.png", "assets/images/hangman-imgs/Hangman-3.png", "assets/images/hangman-imgs/Hangman-4.png", "assets/images/hangman-imgs/Hangman-5.png", "assets/images/hangman-imgs/Hangman-6.png"],
   wordChoice: function () {
     return this.films[Math.floor(Math.random() * this.films.length)]
   },
@@ -30,6 +30,10 @@ var Hangman = {
   },
   printArray: function (targetTag, array) {
     $(targetTag).html(array.join(" "));
+  },
+  resetArrays: function () {
+    this.wrongGuesses = [];
+    this.displayArray = [];
   }
 };
 
@@ -66,13 +70,18 @@ $(document).ready(function () {
     if ((letterIndex < 0) && (Hangman.wrongGuesses.indexOf(userInput.toUpperCase()) == -1)) {
       Hangman.wrongGuesses.push(userInput.toUpperCase());
       Hangman.printArray("#tried-array", Hangman.wrongGuesses);
+      $("#hangman-image").attr("src", Hangman.stickFig[Hangman.wrongGuesses.length]);
 
       if (Hangman.wrongGuesses.length > 5) {
 
         // Ends condition code goes here
+
         losses++;
         $("#loss-counter").html(losses);
-        //Hangman.reset();
+        losses = 0;
+        Hangman.resetArrays();
+
+        // Needs to stop game show or loss artifact
 
       }
 
@@ -89,11 +98,15 @@ $(document).ready(function () {
       if (correctGuesses == Hangman.totalLetters) {
 
         // Win Condition Code goes here.
+
         console.log("Total Letters is " + Hangman.totalLetters);
         wins++;
         $("#win-counter").html(wins);
         correctGuesses = 0;
-        //Hangman.reset()
+        Hangman.resetArrays();
+
+        //Needs to display win and restart game.
+
       }
 
     }
