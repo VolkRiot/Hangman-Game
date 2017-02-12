@@ -205,8 +205,7 @@ $(document).ready(function () {
         $("#poster-img").attr("src", Hangman.films[objIndex]["imgPath"]);
         $("#poster-img").attr("alt", Hangman.films[objIndex]["title"]);
         correctGuesses = 0;
-
-        // TODO: Possibly remove winning title from obj array
+        Hangman.films.splice(objIndex, 1);
 
         // Reset game (not win/lose record)
         resetAll();
