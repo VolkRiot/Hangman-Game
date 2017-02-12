@@ -167,7 +167,7 @@ $(document).ready(function () {
     var updated = false;
 
 
-    if ((letterIndex < 0) && (Hangman.wrongGuesses.indexOf(userInput.toUpperCase()) == -1)) {
+    if ((letterIndex < 0) && (Hangman.wrongGuesses.indexOf(userInput.toUpperCase()) == -1) && (/^[a-zA-Z]*$/.test(userInput))) {
       Hangman.wrongGuesses.push(userInput.toUpperCase());
       Hangman.printArray("#tried-array", Hangman.wrongGuesses);
       $("#hangman-image").attr("src", Hangman.stickFig[Hangman.wrongGuesses.length]);
