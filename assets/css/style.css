@@ -2,3 +2,7 @@
     height: 300px;
     width: 200px;
 }
+
+body{
+    background-image: url("../images/CinemaBackground.jpg")
+}

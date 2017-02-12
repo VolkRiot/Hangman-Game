@@ -1,10 +1,10 @@
-// Hangman game
 // Globals
 var chosenWord;
 var correctGuesses = 0;
 var wins = 0;
 var losses = 0;
 
+// Hangman Object
 var Hangman = {
   films: [{
     "title": "It's a Wonderful Life",
@@ -99,14 +99,13 @@ var Hangman = {
       "imgPath": "assets/images/moviePosters/ettheextraterrestrial.jpeg"
     }
   ],
-
   stickFig:["assets/images/hangman-imgs/Hangman-0.png", "assets/images/hangman-imgs/Hangman-1.png", "assets/images/hangman-imgs/Hangman-2.png", "assets/images/hangman-imgs/Hangman-3.png", "assets/images/hangman-imgs/Hangman-4.png", "assets/images/hangman-imgs/Hangman-5.png", "assets/images/hangman-imgs/Hangman-6.png"],
-  wordChoice: function () {
-    return this.films[Math.floor(Math.random() * this.films.length)]["title"];
-  },
   displayArray: [],
   wrongGuesses: [],
   totalLetters: 0,
+  wordChoice: function () {
+    return this.films[Math.floor(Math.random() * this.films.length)]["title"];
+  },
   prepWord: function (word) {
     this.totalLetters = 0;
     for (var i = 0; i < word.length; i++) {
@@ -122,16 +121,18 @@ var Hangman = {
       }
     }
   },
-  printArray: function (targetTag, array) {
-    $(targetTag).html(array.join(" "));
-  },
   resetGame: function () {
     this.wrongGuesses = [];
     this.displayArray = [];
     $("#hangman-image").attr("src", Hangman.stickFig[0]);
+  },
+  printArray: function (targetTag, array) {
+    $(targetTag).html(array.join(" "));
   }
 };
 
+
+// Helper functions
 function resetAll() {
   Hangman.resetGame();
   correctGuesses = 0;
@@ -154,6 +155,8 @@ function indexByValue(objArray, key, value) {
   return -1;
 }
 
+
+// Begins document run
 $(document).ready(function () {
 
     // Reset whole game
@@ -166,16 +169,13 @@ $(document).ready(function () {
     var letterIndex = chosenWord.toLowerCase().indexOf(userInput);
     var updated = false;
 
-
     if ((letterIndex < 0) && (Hangman.wrongGuesses.indexOf(userInput.toUpperCase()) == -1) && (/^[a-zA-Z]*$/.test(userInput))) {
       Hangman.wrongGuesses.push(userInput.toUpperCase());
       Hangman.printArray("#tried-array", Hangman.wrongGuesses);
       $("#hangman-image").attr("src", Hangman.stickFig[Hangman.wrongGuesses.length]);
 
       if (Hangman.wrongGuesses.length > 5) {
-
         // Loss logic starts here
-
         losses++;
         $("#loss-counter").html(losses);
         losses = 0;
@@ -183,11 +183,10 @@ $(document).ready(function () {
         newWord();
 
         // TODO: Possible losing condition feedback
-
       }
 
-
     } else {
+
       for (var i = 0; i < chosenWord.length; i++) {
         if ((chosenWord[i].toLowerCase() == userInput.toLowerCase()) && (Hangman.displayArray[i] != chosenWord[i])) {
           Hangman.displayArray[i] = chosenWord[i];
@@ -195,10 +194,10 @@ $(document).ready(function () {
           updated = true;
         }
       }
+
       if (correctGuesses == Hangman.totalLetters) {
 
-        // Win Condition Code goes below.
-
+        // Win Condition Code
         wins++;
         $("#win-counter").html(wins);
         var objIndex = indexByValue(Hangman.films, "title" ,chosenWord);
@@ -212,12 +211,12 @@ $(document).ready(function () {
         newWord();
 
         // TODO: Display winning title, maybe multimedia
-
       }
-
     }
+
     if (updated === true) {
       Hangman.printArray("#word-array", Hangman.displayArray);
     }
+
   });
 });
