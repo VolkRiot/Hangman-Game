@@ -166,7 +166,7 @@ $(document).ready(function () {
     resetAll();
     newWord();
 
-  $(document).on('keyup', function () {
+  $(document).on('keyup', function (event) {
 
     var userInput = String.fromCharCode(event.keyCode).toLowerCase();
     var letterIndex = chosenWord.toLowerCase().indexOf(userInput);
