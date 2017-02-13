@@ -9,98 +9,98 @@ var wrongArray = ["_", "_", "_", "_", "_", "_"];
 var Hangman = {
   films: [{
     "title": "It's a Wonderful Life",
-    "imgPath": "assets/images/moviePosters/itsawonderfullife.jpeg"
+    "poster": "itsawonderfullife.jpeg"
     },
     {
       "title": "Raiders of the Lost Arc",
-      "imgPath": "assets/images/moviePosters/raidersofthelostarc.jpeg"
+      "poster": "raidersofthelostarc.jpeg"
     },
     {
       "title": "Star Wars",
-      "imgPath": "assets/images/moviePosters/starwars.jpg"
+      "poster": "starwars.jpg"
     },
     {
       "title": "Citizen Kane",
-      "imgPath": "assets/images/moviePosters/citizenkane.jpeg"
+      "poster": "citizenkane.jpeg"
     },
     {
       "title": "Full Metal Jacket",
-      "imgPath": "assets/images/moviePosters/fullmetaljacket.jpeg"
+      "poster": "fullmetaljacket.jpeg"
     },
     {
       "title": "Clockwork Orange",
-      "imgPath": "assets/images/moviePosters/clockworkorange.jpg"
+      "poster": "clockworkorange.jpg"
     },
     {
       "title": "Titanic",
-      "imgPath": "assets/images/moviePosters/titanic.jpeg"
+      "poster": "titanic.jpeg"
     },
     {
       "title": "The Godfather",
-      "imgPath": "assets/images/moviePosters/thegodfather.jpg"
+      "poster": "thegodfather.jpg"
     },
     {
       "title": "Forrest Gump" ,
-      "imgPath": "assets/images/moviePosters/forrestgump.jpeg"
+      "poster": "forrestgump.jpeg"
     },
     {
       "title": "Taxi Driver",
-      "imgPath": "assets/images/moviePosters/taxidriver.jpeg"
+      "poster": "taxidriver.jpeg"
     },
     {
       "title": "Avatar",
-      "imgPath": "assets/images/moviePosters/avatar.jpeg"
+      "poster": "avatar.jpeg"
     },
     {
       "title": "2001: A Space Odyssey",
-      "imgPath": "assets/images/moviePosters/2001spaceoddysey.jpeg"
+      "poster": "2001spaceoddysey.jpeg"
     },
     {
       "title": "The Lion King",
-      "imgPath": "assets/images/moviePosters/lionking.jpeg"
+      "poster": "lionking.jpeg"
     },
     {
       "title": "Back to the Future",
-      "imgPath": "assets/images/moviePosters/backtothefuture.jpeg"
+      "poster": "backtothefuture.jpeg"
     },
     {
       "title": "Rocky",
-      "imgPath": "assets/images/moviePosters/rocky.jpeg"
+      "poster": "rocky.jpeg"
     },
     {
       "title": "Pulp Fiction",
-      "imgPath": "assets/images/moviePosters/pulpfiction.jpg"
+      "poster": "pulpfiction.jpg"
     },
     {
       "title": "The Matrix",
-      "imgPath": "assets/images/moviePosters/thematrix.jpeg"
+      "poster": "thematrix.jpeg"
     },
     {
       "title": "Jaws",
-      "imgPath": "assets/images/moviePosters/jaws.jpg"
+      "poster": "jaws.jpg"
     },
     {
       "title": "Jurassic Park",
-      "imgPath": "assets/images/moviePosters/jurassicpark.jpeg"
+      "poster": "jurassicpark.jpeg"
     },
     {
       "title": "Airplane!",
-      "imgPath": "assets/images/moviePosters/airplane.jpeg"
+      "poster": "airplane.jpeg"
     },
     {
       "title": "Braveheart",
-      "imgPath": "assets/images/moviePosters/braveheart.jpg"
+      "poster": "braveheart.jpg"
     },
     {
       "title": "Kill Bill",
-      "imgPath": "assets/images/moviePosters/killbill.jpeg"
+      "poster": "killbill.jpeg"
     },
     {
       "title": "E.T. the Extra-Terrestrial",
-      "imgPath": "assets/images/moviePosters/ettheextraterrestrial.jpeg"
+      "poster": "ettheextraterrestrial.jpeg"
     }
   ],
-  stickFig:["assets/images/hangman-imgs/Hangman-0.png", "assets/images/hangman-imgs/Hangman-1.png", "assets/images/hangman-imgs/Hangman-2.png", "assets/images/hangman-imgs/Hangman-3.png", "assets/images/hangman-imgs/Hangman-4.png", "assets/images/hangman-imgs/Hangman-5.png", "assets/images/hangman-imgs/Hangman-6.png"],
+  stickFig:["Hangman-0.png", "Hangman-1.png", "Hangman-2.png", "Hangman-3.png", "Hangman-4.png", "Hangman-5.png", "Hangman-6.png"],
   displayArray: [],
   wrongGuesses: [],
   totalLetters: 0,
@@ -125,7 +125,7 @@ var Hangman = {
   resetGame: function () {
     this.wrongGuesses = [];
     this.displayArray = [];
-    $("#hangman-image").attr("src", Hangman.stickFig[0]);
+    $("#hangman-image").attr("src", "assets/images/hangman-imgs/".concat(Hangman.stickFig[0]));
   },
   // TODO: Refactor to be independat function it does not belong to Hangman alone
   printArray: function (targetTag, array) {
@@ -146,7 +146,7 @@ function newWord() {
   Hangman.prepWord(chosenWord);
   Hangman.printArray("#tried-array", wrongArray);
   Hangman.printArray("#word-array", Hangman.displayArray);
-  $("#hangman-image").attr("src", Hangman.stickFig[0]);
+  $("#hangman-image").attr("src", "assets/images/hangman-imgs/".concat(Hangman.stickFig[0]));
 }
 
 function indexByValue(objArray, key, value) {
@@ -177,7 +177,7 @@ $(document).ready(function () {
 
       wrongArray.pop();
       Hangman.printArray("#tried-array", Hangman.wrongGuesses.concat(wrongArray));
-      $("#hangman-image").attr("src", Hangman.stickFig[Hangman.wrongGuesses.length]);
+      $("#hangman-image").attr("src", "assets/images/hangman-imgs/".concat(Hangman.stickFig[Hangman.wrongGuesses.length]));
 
       if (Hangman.wrongGuesses.length > 5) {
         // Loss logic starts here
@@ -209,7 +209,7 @@ $(document).ready(function () {
         wins++;
         $("#win-counter").html(wins);
         var objIndex = indexByValue(Hangman.films, "title" ,chosenWord);
-        $("#poster-img").attr("src", Hangman.films[objIndex]["imgPath"]);
+        $("#poster-img").attr("src", "assets/images/moviePosters/".concat(Hangman.films[objIndex]["poster"]));
         $("#poster-img").attr("alt", Hangman.films[objIndex]["title"]);
         correctGuesses = 0;
         Hangman.films.splice(objIndex, 1);
