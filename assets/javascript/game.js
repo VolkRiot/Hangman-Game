@@ -3,6 +3,7 @@ var chosenWord;
 var correctGuesses = 0;
 var wins = 0;
 var losses = 0;
+var wrongArray = ["_", "_", "_", "_", "_", "_"];
 
 // Hangman Object
 var Hangman = {
@@ -126,6 +127,7 @@ var Hangman = {
     this.displayArray = [];
     $("#hangman-image").attr("src", Hangman.stickFig[0]);
   },
+  // TODO: Refactor to be independat function it does not belong to Hangman alone
   printArray: function (targetTag, array) {
     $(targetTag).html(array.join(" "));
   }
@@ -136,12 +138,13 @@ var Hangman = {
 function resetAll() {
   Hangman.resetGame();
   correctGuesses = 0;
+  wrongArray = ["_", "_", "_", "_", "_", "_"];
 }
 
 function newWord() {
   chosenWord = Hangman.wordChoice();
   Hangman.prepWord(chosenWord);
-  Hangman.printArray("#tried-array", Hangman.wrongGuesses);
+  Hangman.printArray("#tried-array", wrongArray);
   Hangman.printArray("#word-array", Hangman.displayArray);
   $("#hangman-image").attr("src", Hangman.stickFig[0]);
 }
@@ -171,7 +174,9 @@ $(document).ready(function () {
 
     if ((letterIndex < 0) && (Hangman.wrongGuesses.indexOf(userInput.toUpperCase()) == -1) && (/^[a-zA-Z]*$/.test(userInput))) {
       Hangman.wrongGuesses.push(userInput.toUpperCase());
-      Hangman.printArray("#tried-array", Hangman.wrongGuesses);
+
+      wrongArray.pop();
+      Hangman.printArray("#tried-array", Hangman.wrongGuesses.concat(wrongArray));
       $("#hangman-image").attr("src", Hangman.stickFig[Hangman.wrongGuesses.length]);
 
       if (Hangman.wrongGuesses.length > 5) {
@@ -198,6 +203,9 @@ $(document).ready(function () {
       if (correctGuesses == Hangman.totalLetters) {
 
         // Win Condition Code
+
+        // TODO: Possible timing delay to display word then pause
+
         wins++;
         $("#win-counter").html(wins);
         var objIndex = indexByValue(Hangman.films, "title" ,chosenWord);
