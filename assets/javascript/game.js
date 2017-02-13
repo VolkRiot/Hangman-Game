@@ -12,7 +12,7 @@ var Hangman = {
     "imgPath": "assets/images/moviePosters/itsawonderfullife.jpeg"
     },
     {
-      "title": "Raider's of the Lost Arc",
+      "title": "Raiders of the Lost Arc",
       "imgPath": "assets/images/moviePosters/raidersofthelostarc.jpeg"
     },
     {
