@@ -1,11 +1,9 @@
-// Globals
 var chosenWord;
 var correctGuesses = 0;
 var wins = 0;
 var losses = 0;
 var wrongArray = ["_", "_", "_", "_", "_", "_"];
 
-// Hangman Object
 var Hangman = {
   films: [{
     "title": "It's a Wonderful Life",
@@ -158,8 +156,6 @@ function indexByValue(objArray, key, value) {
   return -1;
 }
 
-
-// Begins document run
 $(document).ready(function () {
 
     // Reset whole game
@@ -211,14 +207,13 @@ $(document).ready(function () {
         var objIndex = indexByValue(Hangman.films, "title" ,chosenWord);
         $("#poster-img").attr("src", "assets/images/moviePosters/".concat(Hangman.films[objIndex]["poster"]));
         $("#poster-img").attr("alt", Hangman.films[objIndex]["title"]);
-        correctGuesses = 0;
         Hangman.films.splice(objIndex, 1);
 
         // Reset game (not win/lose record)
         resetAll();
         newWord();
 
-        // TODO: Display winning title, maybe multimedia
+        // TODO: Display winning title, maybe multimedia -- like sound
       }
     }
 
