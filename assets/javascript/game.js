@@ -205,8 +205,8 @@ $(document).ready(function () {
         wins++;
         $("#win-counter").html(wins);
         var objIndex = indexByValue(Hangman.films, "title" ,chosenWord);
-        $("#poster-img").attr("src", "assets/images/moviePosters/".concat(Hangman.films[objIndex]["poster"]));
         $("#poster-img").attr("alt", Hangman.films[objIndex]["title"]);
+        $("#poster-img").attr("src", "assets/images/moviePosters/".concat(Hangman.films[objIndex]["poster"]));
         Hangman.films.splice(objIndex, 1);
 
         // Reset game (not win/lose record)
