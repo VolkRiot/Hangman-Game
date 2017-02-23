@@ -179,7 +179,6 @@ $(document).ready(function () {
         // Loss logic starts here
         losses++;
         $("#loss-counter").html(losses);
-        losses = 0;
         resetAll();
         newWord();
 
